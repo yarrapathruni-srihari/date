@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Will You Go On A Date With Me?</title>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: radial-gradient(circle at top left, #ffe0f0, #ffc4e1, #ffb6d1, #ff8ecf);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  video {
+    max-width: 90%;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    transition: opacity 1s ease-in-out;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .message {
+    font-size: 2rem;
+    margin: 30px 15px 10px;
+    color: #ff1493;
+  }
+
+  button {
+    padding: 15px 30px;
+    margin: 15px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background-color: #ff69b4;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    background-color: #ff1493;
+  }
+
+  .gif {
+    width: 120px;
+    margin: 10px auto;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .message {
+      font-size: 1.5rem;
+    }
+    button {
+      font-size: 1rem;
+      padding: 12px 20px;
+    }
+    .gif {
+      width: 100px;
+    }
+  }
+
+  /* Falling hearts */
+  .heart {
+    position: absolute;
+    top: -50px;
+    width: 20px;
+    height: 20px;
+    background-image: url('https://i.imgur.com/1J2GVmB.png'); /* Tiny heart image */
+    background-size: cover;
+    animation: fall linear infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+  <video id="proposalVideo" controls autoplay playsinline>
+    <source src="fianl_cut.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div id="question" class="hidden">
+    <img src="heart_gif.gif" alt="heart gif" class="gif">
+    <div class="message">Would you go on a date with me? 🥺</div>
+    <button onclick="handleYes()">Yes</button>
+    <button onclick="handleNo()">No</button>
+  </div>
+
+  <div id="noResponse" class="hidden">
+    <img src="please_gif.gif" alt="please gif" class="gif">
+    <div class="message">Aree yaar 😣 Please click on yes! You have no other option 😅</div>
+    <button onclick="handleYes()">Yes</button>
+  </div>
+
+  <div id="dateInfo" class="hidden">
+    <img src="excited_gif.gif" alt="date gif" class="gif">
+    <div class="message">
+      Yay! 💕<br>
+      I will pick you at 7 pm<strong> near your pg</strong><br>
+      on <strong>August 1st</strong> <strong>be ready !</strong> 🕖
+    </div>
+    <button onclick="showThanks()">OK</button>
+  </div>
+
+  <div id="thankYou" class="hidden">
+    <img src="thank_you_gif.gif" alt="thank you gif" class="gif">
+    <div class="message">Thanks for coming on a date with me! You won’t regret it ❤️</div>
+  </div>
+
+  <script>
+    const video = document.getElementById("proposalVideo");
+    const question = document.getElementById("question");
+    const noResponse = document.getElementById("noResponse");
+    const dateInfo = document.getElementById("dateInfo");
+    const thankYou = document.getElementById("thankYou");
+
+    video.onended = () => {
+      video.style.opacity = 0;
+      setTimeout(() => {
+        video.classList.add("hidden");
+        question.classList.remove("hidden");
+      }, 1000);
+    };
+
+    function handleYes() {
+      question.classList.add("hidden");
+      noResponse.classList.add("hidden");
+      dateInfo.classList.remove("hidden");
+    }
+
+    function handleNo() {
+      question.classList.add("hidden");
+      noResponse.classList.remove("hidden");
+    }
+
+    function showThanks() {
+      dateInfo.classList.add("hidden");
+      thankYou.classList.remove("hidden");
+    }
+    const numberOfHearts = 30;
+  for (let i = 0; i < numberOfHearts; i++) {
+    let heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    document.body.appendChild(heart);}
+  </script>
+
+</body>
+</html>
